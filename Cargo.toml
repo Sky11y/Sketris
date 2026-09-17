@@ -1,0 +1,10 @@
+[package]
+name = "sketris"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+color-eyre = "0.6.5"
+crossterm = "0.29.0"
+rand = "0.10.2"
+ratatui = "0.30.2"
