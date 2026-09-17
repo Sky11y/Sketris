@@ -18,7 +18,7 @@ For following the keyboard state unambiguously this project uses [kitty keyboard
 
 While the game is running no signals are sent to the terminal. **Note**. Though not a signal ctrl+c will exit the game.
 
-This game has currently only been tested on Fedora 44 and alacritty, so no guarantees for it to work smoothly (or at all) on your computer.
+This game has currently only been tested on *Fedora 44* and *alacritty*, so no guarantees for it to work smoothly (or at all) on your computer.
 
 ### Features
 
@@ -52,23 +52,29 @@ This game has currently only been tested on Fedora 44 and alacritty, so no guara
 | Q | Quit |
 | Ctrl-c | Quit |
 
-**Note**. While game is running no signals are sent forward.
+**Important**. While the game is running no signals are sent forward.
 
 ## Getting started
 
 ### Dependencies
 
 - Should support all the usual operating systems: Linux, macOS and Windows.
-- A terminal that supports *kitty keyboard protocol* (see [[#Restrictions]])
+- A terminal that supports *kitty keyboard protocol* (see [Restrictions](#Restrictions))
 - Rust compiler (and preferably Cargo)
 
 ### Running the game
 
-- Clone this repository to your computer.
-- Cd to the repository
-- Execute `cargo run --release` to start the game immediately (after build)
+- Clone this repository to your computer and cd into it.
+```terminal
+git glone git@github.com:Sky11y/Sketris.git && cd Sketris
+```
+- Build and run the binary in one command
+```terminal
+cargo run --release
+```
 
 **Note**. You could also build the program with *rustc* but you have to build and link the external crates (rand, ratatui, crossterm, color-eyre) manually. Do yourself a favor and build it with Cargo.
+
 **Note**. The binary will be found in the *repository-root/target/release/* directory under name ***sketris***.
 
 ## Roadmap
@@ -88,8 +94,8 @@ This game has currently only been tested on Fedora 44 and alacritty, so no guara
 - [ ] I-piece wall kicks might be broken
     - I'm not an expert in Tetris but I think it is not working properly in small caves.
 - [ ] Render the layout only once (should be possible with ratatui)
-    - Layout (boxes and text) is static, why render it on every frame?
-- [ ] Render one line at a time instead of per block/cell
+    - Layout (boxes and some texts) is static, why render it on every frame?
+- [ ] Fill the buffer one line at a time instead of per block/cell
     - Gaming area is small and there's so much to render that this hardly is a bottleneck.
 
 ## Authors
@@ -98,6 +104,6 @@ This game has currently only been tested on Fedora 44 and alacritty, so no guara
 
 ## License
 
-- MIT
+[MIT](https://github.com/Sky11y/Sketris/blob/main/LICENSE)
 
 
