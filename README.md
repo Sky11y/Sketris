@@ -40,7 +40,7 @@ This game has been tested on the setup below with around 8 y/o HP laptop, so no 
     - 3 lines   => 300 x level
     - Tetris    => 1200 x level
 
-<sup>1</sup>Levels will be implemented soon.
+<sup>1 Levels will be implemented soon.</sup>
 
 ### Controls
 
@@ -80,7 +80,7 @@ cargo run --release
 
 **Note**. The binary will be found in the *Sketris/target/release/* directory under name ***sketris***.
 
-<sup>1</sup1>You could also build the program with *rustc* but you have to build and link the external crates (rand, ratatui, crossterm, color-eyre) manually. Do yourself a favor and build it with Cargo.
+<sup>1 You could also build the program with *rustc* but you have to build and link the external crates (rand, ratatui, crossterm, color-eyre) manually. Do yourself a favor and build it with Cargo.</sup1>
 
 
 ## Roadmap
