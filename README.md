@@ -4,13 +4,13 @@ A Tetris for the terminal. Written in Rust.
 
 ## About the project
 
-This project is for me (Sky11y) to learn and better understand Rust. Every line in this project is written by me. I have been using AI only for ideation and in cases where I was stuck with the language and rust error messages didn't help me forward.
+This project is for me ([Sky11y](https://github.com/Sky11y/)) to learn and better understand Rust. Every line in this project is written by me. I have been using AI only for ideation and in cases where I was stuck with the language and rust error messages didn't help me forward.
 
 ### Tools
 
-- [Ratatui](https://docs.rs/ratatui/): TUI
-- [Crossterm](https://docs.rs/crossterm/): Input
-- [Color_eyre](https://docs.rs/color-eyre/): Error handling
+- [Ratatui](https://docs.rs/ratatui/) - TUI
+- [Crossterm](https://docs.rs/crossterm/) - Input
+- [Color_eyre](https://docs.rs/color-eyre/) - Error handling
 
 ### Restrictions
 
@@ -18,7 +18,12 @@ For following the keyboard state unambiguously this project uses [kitty keyboard
 
 While the game is running no signals are sent to the terminal. **Note**. Though not a signal ctrl+c will exit the game.
 
-This game has currently only been tested on *Fedora 44* and *alacritty*, so no guarantees for it to work smoothly (or at all) on your computer.
+This game has been tested on the setup below with around 8 y/o HP laptop, so no guarantees for it to work smoothly (or at all) on your computer.
+
+<ins>Tested on</ins>
+- **OS:** Linux (Fedora 44)
+- **Terminals:** Alacritty
+- **Hardware:** Intel i5-8250U, Intel UHD 620 GPU, 16 GB RAM
 
 ### Features
 
@@ -29,13 +34,13 @@ This game has currently only been tested on *Fedora 44* and *alacritty*, so no g
 - Lock down 0.5 s with move reset (15 moves/rotations)
 - Next piece preview
 - One bag filled and randomly shuffled when empty
-- Points:
+- Points<sup>1</sup>:
     - 1 line    => 40 x level
     - 2 lines   => 100 x level
     - 3 lines   => 300 x level
     - Tetris    => 1200 x level
 
-**Note**. Levels will be implemented soon.
+<sup>1</sup>Levels will be implemented soon.
 
 ### Controls
 
@@ -65,30 +70,33 @@ This game has currently only been tested on *Fedora 44* and *alacritty*, so no g
 ### Running the game
 
 - Clone this repository to your computer and cd into it.
-```terminal
+```sh
 git glone git@github.com:Sky11y/Sketris.git && cd Sketris
 ```
-- Build and run the binary in one command
-```terminal
+- Build and run the binary in one command<sup>1</sup1>
+```sh
 cargo run --release
 ```
 
-**Note**. You could also build the program with *rustc* but you have to build and link the external crates (rand, ratatui, crossterm, color-eyre) manually. Do yourself a favor and build it with Cargo.
+**Note**. The binary will be found in the *Sketris/target/release/* directory under name ***sketris***.
 
-**Note**. The binary will be found in the *repository-root/target/release/* directory under name ***sketris***.
+<sup>1</sup1>You could also build the program with *rustc* but you have to build and link the external crates (rand, ratatui, crossterm, color-eyre) manually. Do yourself a favor and build it with Cargo.
+
 
 ## Roadmap
 
-- v. 0.1
+- v. 0.1.0
     - [ ] Levels
+    - [ ] Game Menu state with simple "start" logic
     - [ ] Clean up the code and separate to modules
-    - [ ] Game menu
     - [ ] Better Game over state
-    - [ ] Local leaderboard
     - [ ] Make horizontal movement smoother
     - [ ] Better error handling and last clean up
+- v. > 0.1.0
+    - [ ] Game menu
+    - [ ] Local leaderboard
 
-### Optional improvements
+### Possible improvements
 
 - [ ] Add extra points for clearing the whole area
 - [ ] I-piece wall kicks might be broken
