@@ -292,7 +292,6 @@ impl Sketris {
                     let lock_down_timer = now - self.last_lock_down;
                     if lock_down_timer >= self.lock_down_timer || self.lock_down_counter > 15 {
                         spawn_new_piece = true;
-                        self.lock_down_counter = 0;
                     }
                 }
                 if !spawn_new_piece {
@@ -304,7 +303,7 @@ impl Sketris {
                             self.lock_down_counter = 0;
                         } else if self.lock_down_counter == 0 {
                             self.lock_down_counter = 1;
-                            self.last_lock_down = Instant::now();
+                            self.last_lock_down = now;
                         }
                         self.last_gravity = now;
                     }
@@ -314,6 +313,15 @@ impl Sketris {
                 self.update_play_area_cells();
                 self.current_piece = self.next_piece.take().unwrap();
                 self.next_piece = self.bag.piece_owned();
+                // test if new piece is able to move any step down
+                let spawn_origin = self.new_position();
+                if !self.validate_new_position(&spawn_origin) {
+                    self.state = State::GameOver;
+                }
+                // reset counters
+                self.lock_down_counter = 0;
+                self.last_lock_down = now;
+                self.last_gravity = now;
             }
             self.test_piece = TestPiece::new(&self.current_piece);
         }
@@ -326,10 +334,8 @@ impl Sketris {
             let x = origin.x + offset.0;
             let y = origin.y + offset.1;
 
-            // I'm sceptical if this is the correct way to check the spawning piece. Though seems to work.
             if y < 0 {
-                self.state = State::GameOver;
-                return;
+                continue;
             }
             self.play_area_cells[y as usize][x as usize] = true;
         }
@@ -641,6 +647,13 @@ impl Widget for &Sketris {
                     Style::default().fg(current_piece.color),
                 );
             }
+        } else {
+            buf.set_string(
+                play_area.x + 5,
+                play_area.y + 10,
+                "GAME OVER",
+                Style::default().fg(Color::Magenta),
+            )
         }
 
         // draw next piece
