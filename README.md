@@ -71,7 +71,7 @@ This game has been tested on the setup below with around 8 y/o HP laptop, so no 
 
 - Clone this repository to your computer and cd into it.
 ```sh
-git glone git@github.com:Sky11y/Sketris.git && cd Sketris
+git clone git@github.com:Sky11y/Sketris.git && cd Sketris
 ```
 - Build and run the binary in one command<sup>1</sup1>
 ```sh
@@ -80,23 +80,25 @@ cargo run --release
 
 **Note**. The binary will be found in the *Sketris/target/release/* directory under name ***sketris***.
 
-<sup>1 You could also build the program with *rustc* but you have to build and link the external crates (rand, ratatui, crossterm, color-eyre) manually. Do yourself a favor and build it with Cargo.</sup1>
+<sup>1) You could also build the program with *rustc* but you have to build and link the external crates (rand, ratatui, crossterm, color-eyre) manually. Do yourself a favor and build it with Cargo.</sup>
 
 
 ## Roadmap
 
-- v. 0.1.0
+- 0.1.0
     - [ ] Levels
     - [ ] Game Menu state with simple "start" logic
     - [ ] Clean up the code and separate to modules
     - [ ] Better Game over state
     - [ ] Make horizontal movement smoother
-    - [ ] Better error handling and last clean up
-- v. > 0.1.0
+    - [ ] Better error handling and last clean up before first semantic version.
+- 0.2.0
     - [ ] Game menu
     - [ ] Local leaderboard
 
 ### Possible improvements
+
+This section lists the improvements for the game that might not get implemented or it is not yet decided, in which version it will be introduced.
 
 - [ ] Add extra points for clearing the whole area
 - [ ] I-piece wall kicks might be broken
@@ -105,6 +107,15 @@ cargo run --release
     - Layout (boxes and some texts) is static, why render it on every frame?
 - [ ] Fill the buffer one line at a time instead of per block/cell
     - Gaming area is small and there's so much to render that this hardly is a bottleneck.
+
+### Versioning
+
+This program follows a form of semantic versioning (Major.Minor.Patch).
+
+- First version will be 0.1.0
+- Patch changes: Bug fixes and code cleaning that don't affect in programs behavior.
+- Minor changes: Feature additions or other behavior affecting changes.
+- Major changes: Once the program is considered stable Major version will be published.
 
 ## Authors
 
