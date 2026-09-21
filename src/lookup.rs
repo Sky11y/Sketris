@@ -96,3 +96,12 @@ pub const I_WALL_KICK_TABLE: [[[(i32, i32); 5]; 2]; 4] = [
         [(0, 0), (-2, 0), (1, 0), (-2, -1), (1, 2)],
     ],
 ];
+
+/*
+ * level speeds taken here
+ * https://gamertagmythras.com/blog/tetris/tetris-gravity-and-lock-delay-guide
+ */
+pub const LEVELS: [u64; 20] = [
+    1000000, 793000, 618000, 473000, 355000, 262000, 190000, 135000, 94000, 64000, 43000, 28000,
+    18000, 11000, 7100, 4300, 2500, 1500, 820, 460,
+];

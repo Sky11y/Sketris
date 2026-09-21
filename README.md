@@ -34,13 +34,12 @@ This game has been tested on the setup below with around 8 y/o HP laptop, so no 
 - Lock down 0.5 s with move reset (15 moves/rotations)
 - Next piece preview
 - One bag filled and randomly shuffled when empty
-- Points<sup>1</sup>:
+- Level up every 10 lines
+- Points:
     - 1 line    => 40 x level
     - 2 lines   => 100 x level
     - 3 lines   => 300 x level
     - Tetris    => 1200 x level
-
-<sup>1 Levels will be implemented soon.</sup>
 
 ### Controls
 
@@ -86,7 +85,7 @@ cargo run --release
 ## Roadmap
 
 - 0.1.0
-    - [ ] Levels
+    - [x] Levels
     - [ ] Game Menu state with simple "start" logic
     - [ ] Clean up the code and separate to modules
     - [ ] Better Game over state

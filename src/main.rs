@@ -22,7 +22,7 @@ use ratatui::{
 };
 
 mod lookup;
-use crate::lookup::{I_WALL_KICK_TABLE, OFFSET_TABLE, WALL_KICK_TABLE};
+use crate::lookup::{I_WALL_KICK_TABLE, LEVELS, OFFSET_TABLE, WALL_KICK_TABLE};
 
 pub fn set_panic_hook() {
     let hook = std::panic::take_hook();
@@ -72,6 +72,7 @@ pub struct Sketris {
     current_piece: Piece,
     test_piece: TestPiece,
     next_piece: Option<Piece>,
+    level: usize,
     gravity_interval: Duration,
     last_gravity: Instant,
     soft_drop: bool,
@@ -213,6 +214,7 @@ impl Sketris {
         let current_piece = bag.piece_owned().unwrap();
         let next_piece = bag.piece_owned();
         let test_piece = TestPiece::new(&current_piece);
+        let gravity_interval = Duration::from_micros(LEVELS[0]);
         Self {
             exit: false,
             play_area_cells: [[false; 10]; 20],
@@ -220,7 +222,8 @@ impl Sketris {
             current_piece,
             next_piece,
             test_piece,
-            gravity_interval: Duration::from_millis(500),
+            gravity_interval,
+            level: 0,
             last_gravity: Instant::now(),
             soft_drop: false,
             hard_drop: false,
@@ -278,7 +281,9 @@ impl Sketris {
                 self.last_gravity = now;
                 spawn_new_piece = true;
             } else {
-                let gravity_interval = if self.soft_drop {
+                // also check level so player can't break the piece while gravity is higher than
+                // soft drop
+                let gravity_interval = if self.soft_drop && self.level < 10 {
                     Duration::from_millis(50)
                 } else {
                     self.gravity_interval
@@ -346,20 +351,21 @@ impl Sketris {
             }
         }
 
-        self.lines += removed.len();
         match removed.len() {
-            1 => self.points += 40,
-            2 => self.points += 100,
-            3 => self.points += 300,
-            4 => self.points += 1200,
+            1 => self.points += 40 * (self.level + 1),
+            2 => self.points += 100 * (self.level + 1),
+            3 => self.points += 300 * (self.level + 1),
+            4 => self.points += 1200 * (self.level + 1),
             _ => {}
         }
 
-        /*
-         * TODO:
-         *     We need a lookup table for levels. "What level is the player on".
-         *     Level up => gravity_interval down
-         */
+        // update level if crossed another 10 lines
+        let previous = self.lines / 10;
+        self.lines += removed.len();
+        if self.lines / 10 - previous == 1 && self.level < 20 {
+            self.level += 1;
+            self.gravity_interval = Duration::from_micros(LEVELS[self.level]);
+        }
 
         for line in removed {
             for y in (1..=line).rev() {
@@ -577,6 +583,12 @@ impl Widget for &Sketris {
         buf.set_string(
             empty.x + 1,
             empty.y + 2,
+            format!("LEVEL {}", self.level + 1),
+            Style::default().fg(Color::Magenta),
+        );
+        buf.set_string(
+            empty.x + 1,
+            empty.y + 3,
             format!("POINTS {}", self.points),
             Style::default().fg(Color::Magenta),
         );
